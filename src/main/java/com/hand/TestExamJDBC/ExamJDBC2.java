@@ -31,18 +31,19 @@ public class ExamJDBC2 {
 
 //			String sql = "SELECT inventory.film_id from rental,customer,inventory WHERE rental.inventory_id = inventory.inventory_id AND rental.customer_id = customer.customer_id AND customer.customer_id="
 //					+ CustomerID;
-			String sql = "SELECT inventory.film_id,film.title,rental_date FROM rental,film,inventory WHERE rental.inventory_id= inventory.inventory_id AND inventory.film_id= film.film_id;";
+			String sql = "SELECT inventory.film_id,film.title,rental_date FROM rental,film,inventory WHERE rental.inventory_id= inventory.inventory_id AND inventory.film_id= film.film_id AND rental.customer_id ="+ CustomerID+" ORDER BY rental_date DESC;";
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			ResultSet rs1[] = new ResultSet[100];
 			int i = 0;
+			System.out.println("JOHNNIE.CHISHOLM 租用的Film-­‐>");
+			System.out.println("FilmID|Film名称|租用时间");
 			
 			while (rs.next()){
-				System.out.println("JOHNNIE.CHISHOLM 租用的Film-­‐>");
-				System.out.println("FilmID|Film名称|租用时间");
 				System.out.print(rs.getInt("film_id")+"|");
 				System.out.print(rs.getString("title")+"|");
 				System.out.print(rs.getDate("rental_date"));
+				System.out.println();
 
 			}
 			
